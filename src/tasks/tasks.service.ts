@@ -10,6 +10,10 @@ export class TasksService {
   getAllTasks() {
     return this.tasks;
   }
+  findOne(taskId: string): Task[] | null {
+    const getOne = this.tasks.filter((task) => task.id === taskId);
+    return getOne || null;
+  }
 
   addTask(createTasks: CreateTaskDTO): Task {
     const { title, description } = createTasks;
@@ -21,5 +25,10 @@ export class TasksService {
     };
     this.tasks.push(newTask);
     return newTask;
+  }
+
+  deleteTask(taskId: string): void {
+    const getTask = this.tasks.filter((tasks) => tasks.id !== taskId);
+    this.tasks = getTask;
   }
 }
